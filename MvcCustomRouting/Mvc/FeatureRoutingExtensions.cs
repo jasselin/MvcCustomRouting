@@ -34,13 +34,15 @@ namespace MvcCustomRouting.Mvc
 
         private static ControllerActionEndpointDataSource GetOrCreateDataSource(IEndpointRouteBuilder endpoints)
         {
-            //var dataSource = endpoints.DataSources.OfType<ControllerActionEndpointDataSource>().FirstOrDefault();
-            //if (dataSource == null)
-            //{
-                var dataSource = endpoints.ServiceProvider.GetRequiredService<ControllerActionEndpointDataSource>();
+            var dataSource = endpoints.DataSources.OfType<ControllerActionEndpointDataSource>().FirstOrDefault();
+            if (dataSource == null)
+            {
+                dataSource = endpoints.ServiceProvider.GetRequiredService<ControllerActionEndpointDataSource>();
                 endpoints.DataSources.Add(dataSource);
-            //}
+            }
 
+            //var dataSource = endpoints.ServiceProvider.GetRequiredService<ControllerActionEndpointDataSource>();
+            //endpoints.DataSources.Add(dataSource);
             return dataSource;
         }
     }
